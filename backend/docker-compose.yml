@@ -13,6 +13,10 @@ services:
       - MYSQL_USER=root
       - MYSQL_PASSWORD=rootpassword
       - MYSQL_DATABASE=testdb
+      - PAYMENT_LOGIN_KEY=899Ny3FJdtb
+      - PAYMENT_TRANSACTION_KEY=34rPX7v25bBjHd6N
+      - MAILJET_API_KEY=ccc97ea75f1ce90d1406da17eb79fa86
+      - MAILJET_SECRET_KEY=88d5a807ffd3b5b31f13a558f3621172
     depends_on:
       - mysql
 

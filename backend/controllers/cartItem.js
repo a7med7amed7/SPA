@@ -128,7 +128,27 @@ const deleteCartItem = (req, res, next) => {
     })
 };
 
+const clearCart = (req, res, next) => {
+    console.log("DELETE", req.params.id)
+    models.clearCart(req.params.id).then(result => {
+        console.log(result, result.affectedRows);
+        if (!result.affectedRows) {
+            return res.status(404).json({
+                status: 0,
+                message: "There no items!"
+            });
+        }
+        return res.status(200).json({
+            status: 1,
+        });
+    }).catch(err => {
+        return res.status(500).json({
+            status: 0,
+            message: "Unable to clear the cart"
+        });
+    })
+};
 module.exports = {
-    getCartItems, getCartItem, createCartItem, deleteCartItem, updateCartItemQuantity
+    getCartItems, getCartItem, createCartItem, deleteCartItem, updateCartItemQuantity, clearCart
 }
 
