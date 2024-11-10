@@ -50,7 +50,7 @@ The frontend is running on port 4000
 - **Endpoint**: `/products`
 - **Method**: `POST`
 - **Description**: Creates a new product.
-- **Request Body**: JSON object with product details (`name`, `description`, `price`).
+- **Request Body**: JSON object with product details (`name`, `stock`, `price`).
 - **Response**:
   - **Status 200**: Returns the created product data.
   - **Status 500**: Error creating product.
@@ -60,9 +60,9 @@ The frontend is running on port 4000
 - **Endpoint**: `/products/:id`
 - **Method**: `PATCH`
 - **Description**: Updates a product by ID.
-- **Request Body**: JSON object with updated fields  (`name`, `description`, `price`).
+- **Request Body**: JSON object with updated fields  (`name`, `stock`, `price`).
 - **Response**:
-  - **Status 200**: Success message if product is updated.
+  - **Status 200**: Success message if the product is updated.
   - **Status 404**: Product not found.
   - **Status 500**: Error updating product.
 
