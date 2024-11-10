@@ -1,7 +1,7 @@
 ## How to use
 
 ```
-sudo docker-compose up -d --build
+sudo docker-compose -f docker-compose.yml up -d --build
 ```
 ```
 sudo docker-compose exec mysql mysql -u root -p
