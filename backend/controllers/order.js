@@ -67,31 +67,31 @@ const createOrder = async (req, res, next) => {
         isEmpty(req.body.expiryDate) ||
         isEmpty(req.body.CVV)
     ) {
-        return res.status(404).json({
+        return res.status(200).json({
             status: 0,
             message: "Some fields are empty."
         });
     }
     if (!isValidCardNumber(req.body.cardNumber)) {
-        return res.status(500).json({
+        return res.status(200).json({
             status: 0,
             message: "Invalid Card Number"
         });
     }
     if (isValidExpiryDate(req.body.expiryDate) === 1) {
-        return res.status(500).json({
+        return res.status(200).json({
             status: 0,
             message: "Invalid Expiry date format, should be MM/YY"
         });
     }
     if (isValidExpiryDate(req.body.expiryDate) === 2) {
-        return res.status(500).json({
+        return res.status(200).json({
             status: 0,
             message: "Invalid Expiry date format, should be a future date"
         });
     }
     if (!isValidCVV(req.body.CVV)) {
-        return res.status(500).json({
+        return res.status(200).json({
             status: 0,
             message: "Invalid CVV, should be a 3 or 4 digits number"
         });
@@ -101,7 +101,7 @@ const createOrder = async (req, res, next) => {
     let isSuccess = await payment(req.body.cardNumber, req.body.expiryDate, req.body.CVV, price, apiLoginId, transactionKey, billingAddress);
     console.log(isSuccess);
     if (!isSuccess) {
-        return res.status(500).json({
+        return res.status(200).json({
             status: 0,
             message: "Something went wrong during the payment process!"
         });

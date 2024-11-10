@@ -48,6 +48,7 @@ export default function page() {
 
         getCartItems();
     }, []);
+    const [hasError, setHasError] = useState(false);
     useEffect(() => {
         if (products) {
             let cnt = 0;
@@ -83,13 +84,25 @@ export default function page() {
             },
             body: JSON.stringify(data),
         });
-        console.log(res);
-        if (res.status === 200) {
-            setMessage("Your order is done, please check your email (+spam)")
+
+        if (!res.ok) {
+            setHasError(true);
+            setMessage("Something went wrong, double check your data!");
+            return;
+        }
+
+        const d = await res.json();  // Parse the response to JSON
+        console.log(d);
+
+        if (d.status === 1) {
+            setHasError(false);
+            setMessage("Your order is done, please check your email (+spam)");
         } else {
-            setMessage("Something went wrong, double check your data!")
+            setMessage(d.message);
+            setHasError(true);
         }
         console.log(message);
+
     }
     return (
         <div className={styles.container}>
@@ -140,7 +153,7 @@ export default function page() {
                     <input type="email" placeholder='Email' className={styles.formInput} onChange={(e) => setEmail(e.target.value)} />
                 </section>
                 <input type="button" value="Submit Your Order" className={styles.formButton} onClick={handleClick} />
-                {message ? <div style={{ padding: "3px", backgroundColor: "green", color: "white", textAlign: "center" }}>{message}</div> : ""}
+                {message ? <div style={{ padding: "3px", backgroundColor: hasError ? "red" : "green", color: "white", textAlign: "center" }}>{message}</div> : ""}
             </form>
         </div>
     );

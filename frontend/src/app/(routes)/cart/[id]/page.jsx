@@ -10,6 +10,7 @@ function Page() {
     const [loaded, setLoaded] = useState(false);
     const [hasMounted, setHasMounted] = useState(false);
     const [quantity, setQuantity] = useState(1);
+    const [hasError, setHasError] = useState(false);
     const params = useParams();
     const { id } = params;
     const [message, setMessage] = useState(null);
@@ -51,9 +52,10 @@ function Page() {
                 body: JSON.stringify(data),
             });
             console.log(res);
-
+            setHasError(false);
             setMessage("Quantity Updated")
         } catch (error) {
+            setHasError(true);
             console.error('Error adding to cart:', error);
             setMessage("Failed to update")
 
@@ -61,7 +63,7 @@ function Page() {
     };
     return (
         <div className={styles.container}>
-            {message ? <div style={{ padding: "3px", backgroundColor: "green", color: "white", textAlign: "center" }}>{message}</div> : ""}
+            {message ? <div style={{ padding: "3px", backgroundColor: hasError ? "red" : "green", color: "white", textAlign: "center" }}>{message}</div> : ""}
             <h1 className={styles.title}>Product</h1>
             {loaded ? (
                 product ? (
