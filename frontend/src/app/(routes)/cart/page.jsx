@@ -112,17 +112,23 @@ export default function page() {
                     {products ? products.map((product) => (
                         <li key={product.id} className={styles.productItem}>
                             <div className={styles.productItemLink}>
+                                <div className={styles.productX}>X</div>
                                 <div className={styles.imageContainer}>
                                     <Image src={CardImage} alt='Card Image' fill={true} />
                                 </div>
                                 <div className={styles.productData}>
                                     <h2>{product.name}</h2>
-                                    <p style={{ fontWeight: "bold" }}>Price: ${product.price}</p>
-                                    <div>
-                                        Quantity :{product.quantity}
-                                        <Link href={`/cart/${product.cid}`} style={{ color: "blue", fontSize: "10px", marginLeft: "10px", textDecoration: "underline" }}>update</Link>
-                                    </div>
+                                    <p className={styles.productColor}>White</p>
                                 </div>
+                                <div className={styles.productQuantity}>
+                                    <Link href={`/cart/${product.cid}`} style={{ color: "black", background: "#ddcaca", fontSize: "40px", padding: "8px 25px", margin: "0 6px" }}>-</Link>
+                                    <div style={{ fontSize: "20px", margin: "0 8px" }}>
+                                        {product.quantity}
+                                    </div>
+                                    <Link href={`/cart/${product.cid}`} style={{ color: "black", background: "#ddcaca", fontSize: "40px", padding: "8px 20px", margin: "0 6px" }}>+</Link>
+                                </div>
+                                <p style={{ fontWeight: "bold" }}> {product.price}$</p>
+
                             </div>
                         </li>
                     )) : (
