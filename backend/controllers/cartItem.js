@@ -43,7 +43,7 @@ const getCartItems = async (req, res, next) => {
     });
 };
 const getCartItem = async (req, res, next) => {
-    let quit = false, id = 1;
+    let quit = false, id = 1, qnt = 0;
     await models.getCartItem(req.params.id).then(result => {
         console.log(result, result.length);
         if (!result.length) {
@@ -54,6 +54,7 @@ const getCartItem = async (req, res, next) => {
             });
         }
         id = result[0].product_id
+        qnt = result[0].quantity;
         console.log(id, result)
         // return res.status(200).json({
         //     status: 1,
@@ -69,13 +70,14 @@ const getCartItem = async (req, res, next) => {
     })
     if (quit) return;
     models_product.getProduct(id).then(result => {
-        console.log(result, result.length);
+        console.log("QNT", result, result.length);
         if (!result.length) {
             return res.status(404).json({
                 status: 0,
                 message: "There no product with the given id!"
             });
         }
+        result[0]["quantity"] = qnt;
         return res.status(200).json({
             status: 1,
             data: result

@@ -68,7 +68,7 @@ function Page() {
                     <div className={styles.productDetails}>
                         <h2>{product.name}</h2>
                         <p>Price: ${product.price}</p>
-                        <p>Available: {product.stock} pieces</p>
+                        <p>Available: {product.stock + product.quantity} pieces</p>
                     </div>
                 ) : (
                     <p>Product not found</p>
@@ -78,7 +78,7 @@ function Page() {
             )}
             <hr />
             <h4 style={{ marginTop: "15px" }}>Add The Quantity</h4>
-            <input type='number' className={styles.quantityInput} placeholder='1' value={quantity} onChange={(e) => setQuantity(Math.min(product.stock, Math.max(1, e.target.value)))} />
+            <input type='number' className={styles.quantityInput} placeholder='1' value={quantity} onChange={(e) => setQuantity(Math.min(product.stock + product.quantity, Math.max(1, e.target.value)))} />
             <div onClick={handleAddToCart} className={styles.addToCart}>Update</div>
         </div>
     );
