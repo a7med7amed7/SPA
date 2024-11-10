@@ -57,10 +57,25 @@ const deleteProduct = async (id) => {
         throw error;
     }
 }
+
+const getListOfProducts = async (list) => {
+    try {
+        const placeholders = list.map(() => '?').join(', ');
+        const query = `SELECT * FROM products WHERE id IN (${placeholders})`;
+        console.log(query, list);
+        const [result] = await pool.query(query, list)
+        console.log(result)
+        return result;
+    } catch (error) {
+        console.log(error)
+        throw error;
+    }
+}
 module.exports = {
     getAllProducts,
     createProduct,
     getProduct,
     updateProduct,
-    deleteProduct
+    deleteProduct,
+    getListOfProducts
 }

@@ -1,0 +1,56 @@
+/* /styles/Product.module.css */
+.container {
+    padding: 20px;
+    max-width: 600px;
+    margin: 10% auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.productDetails {
+    color: rgb(47, 40, 40);
+}
+
+.title {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.price {
+    font-size: 1.5rem;
+    color: #0070f3;
+    margin-bottom: 10px;
+}
+
+.addToCart {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    margin: 20px 0px;
+    background-color: navy;
+    color: white;
+    font-size: 20px;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    transition: all 0.5s ease;
+    cursor: pointer;
+}
+
+.addToCart:hover {
+    background-color: white;
+    color: navy;
+    border: 1px solid navy;
+
+}
+
+.quantityInput {
+    outline: none;
+    background-color: whitesmoke;
+    color: black;
+    padding: 8px;
+    width: 100%;
+    border: 1px solid navy;
+    border-radius: 5px;
+}

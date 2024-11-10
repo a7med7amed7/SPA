@@ -43,6 +43,7 @@ const updateCartItemQuantity = async (id, quantity) => {
         );
         return result;
     } catch (error) {
+        console.log(error)
         throw error;
     }
 }

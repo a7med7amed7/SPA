@@ -1,15 +1,16 @@
 const express = require('express');
 require('dotenv').config();
+const cors = require('cors')
 const productRoutes = require('./routes/product')
 const userRoutes = require('./routes/user')
 const cartItemRoutes = require('./routes/cartItem')
 const orderRoutes = require('./routes/order')
 
-
 const app = express();
+app.use(cors());
 app.use(express.json());
 app.get('/', (req, res) => {
-    res.send('Hello, world!');
+  res.send('Hello, world!');
 });
 app.use('/api/v1/products', productRoutes);
 app.use('/api/v1/users', userRoutes);
@@ -17,7 +18,7 @@ app.use('/api/v1/cartItems', cartItemRoutes);
 app.use('/api/v1/orders', orderRoutes);
 
 app.listen(3000, () => {
-    console.log('Server running on http://localhost:3000');
+  console.log('Server running on http://localhost:3000');
 });
 /*
 CREATE TABLE orders (
