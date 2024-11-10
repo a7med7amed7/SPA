@@ -21,6 +21,8 @@ export default function page() {
     const [phoneNumber, setPhoneNumber] = useState("");
     const [email, setEmail] = useState("");
     const [totalPrice, setTotalPrice] = useState(0);
+    const [message, setMessage] = useState(null);
+
     useEffect(() => {
         setHasMounted(true);
     }, []);
@@ -82,6 +84,12 @@ export default function page() {
             body: JSON.stringify(data),
         });
         console.log(res);
+        if (res.status === 200) {
+            setMessage("Your order is done, please check your email (+spam)")
+        } else {
+            setMessage("Something went wrong, double check your data!")
+        }
+        console.log(message);
     }
     return (
         <div className={styles.container}>
@@ -132,6 +140,7 @@ export default function page() {
                     <input type="email" placeholder='Email' className={styles.formInput} onChange={(e) => setEmail(e.target.value)} />
                 </section>
                 <input type="button" value="Submit Your Order" className={styles.formButton} onClick={handleClick} />
+                {message ? <div style={{ padding: "3px", backgroundColor: "green", color: "white", textAlign: "center" }}>{message}</div> : ""}
             </form>
         </div>
     );

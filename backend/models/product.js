@@ -8,6 +8,7 @@ const getAllProducts = async (callback) => {
         );
         return result;
     } catch (error) {
+        console.log(error);
         throw error;
     }
 };

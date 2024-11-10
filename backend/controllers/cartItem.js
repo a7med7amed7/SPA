@@ -13,7 +13,6 @@ const getCartItems = async (req, res, next) => {
         //     data: result
         // });
     }).catch(err => {
-        quit = true;
         return res.status(500).json({
             status: 0,
             message: "Unable to get the cart items"

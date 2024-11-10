@@ -8,6 +8,7 @@ const getCartItems = async (userId) => {
         );
         return result;
     } catch (error) {
+        console.log(error)
         throw error;
     }
 };

@@ -67,7 +67,7 @@ const createOrder = async (req, res, next) => {
         isEmpty(req.body.expiryDate) ||
         isEmpty(req.body.CVV)
     ) {
-        return res.status(500).json({
+        return res.status(404).json({
             status: 0,
             message: "Some fields are empty."
         });
@@ -106,7 +106,7 @@ const createOrder = async (req, res, next) => {
             message: "Something went wrong during the payment process!"
         });
     }
-    await sendEmail("Order", billingAddress, price, req.body.products)
+    await sendEmail("Order", billingAddress, price, req.body.products, req.body.email, req.body.firstName)
     await models.createOrder(req.body).then(result => {
         console.log(result);
         return res.status(200).json({

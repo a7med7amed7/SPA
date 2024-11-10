@@ -1,13 +1,15 @@
 version: '3.8'
 
 services:
-  node-app:
-    build: .
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
     volumes:
-      - ./:/app
-      - /app/node_modules
+      - ./backend:/app
+      - /app/node_modules # Avoid overwriting node_modules
     environment:
       - MYSQL_HOST=mysql
       - MYSQL_USER=root
@@ -29,6 +31,20 @@ services:
       - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - backend
 
 volumes:
   mysql_data:

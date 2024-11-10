@@ -21,7 +21,8 @@ export default function ProductList() {
                 const data = await res.json();
                 setProducts(data.data);
             } catch (err) {
-                console.error('Fetch error:', err);
+                console.log(err)
+                // console.error('Fetch error:', err);
             }
             setLoaded(true);
         };
