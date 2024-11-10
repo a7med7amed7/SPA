@@ -1,10 +1,10 @@
 ## How to use
 
 ```
-docker-compose up -d --build
+sudo docker-compose up -d --build
 ```
 ```
-docker-compose exec mysql mysql -u root -p
+sudo docker-compose exec mysql mysql -u root -p
 ```
 password: rootpassword
 ```
@@ -54,7 +54,13 @@ The frontend is running on port 4000
 - **Response**:
   - **Status 200**: Returns the created product data.
   - **Status 500**: Error creating product.
-
+```
+{
+    "name":"PC",
+    "price":320,
+    "stock":32
+}
+```
 ### 4. **Update Product**
 
 - **Endpoint**: `/products/:id`
@@ -81,7 +87,7 @@ The frontend is running on port 4000
 ### Cart Endpoints
 
 1. **Get All Cart Items**
-   - **Endpoint**: `/cart/items`
+   - **Endpoint**: `/cartItems`
    - **Method**: `POST`
    - **Description**: Retrieves all items in the cart.
    - **Response**:
@@ -89,7 +95,7 @@ The frontend is running on port 4000
      - **Status 500**: Error retrieving cart items.
 
 2. **Get Cart Item by ID**
-   - **Endpoint**: `/cart/items/:id`
+   - **Endpoint**: `/cartItems/:id`
    - **Method**: `GET`
    - **Description**: Retrieves a specific cart item by its ID.
    - **Response**:
@@ -98,26 +104,38 @@ The frontend is running on port 4000
      - **Status 500**: Error retrieving cart item.
 
 3. **Create Cart Item**
-   - **Endpoint**: `/cart/items`
+   - **Endpoint**: `/cartItems`
    - **Method**: `POST`
    - **Description**: Adds a new item to the cart.
+   - **Request Body**: JSON object with cart details (`userId`, `productId`, `quantity`).
    - **Response**:
      - **Status 200**: Success message with created cart item.
      - **Status 400**: Item already in cart.
      - **Status 404**: Product not found or insufficient stock.
      - **Status 500**: Error creating cart item.
-
+```
+{
+    "userId":"1",
+    "productId":"2",
+    "quantity":14
+}
+```
 4. **Update Cart Item Quantity**
-   - **Endpoint**: `/cart/items/:id`
+   - **Endpoint**: `/cartItems/:id`
    - **Method**: `PATCH`
-   - **Description**: Updates the quantity of an item in the cart.
+   - **Description**: Updates the quantity of an item in the cart by passing the item's id as a parameter.
+   - **Request Body**: JSON object with cart item's quantity
    - **Response**:
-     - **Status 200**: Success message with updated item.
+     - **Status 200**: Success message with the updated item.
      - **Status 404**: Item or product not found.
      - **Status 500**: Error updating item quantity.
-
+```
+{
+    "quantity":17
+}
+```
 5. **Delete Cart Item**
-   - **Endpoint**: `/cart/items/:id`
+   - **Endpoint**: `/cartItems/:id`
    - **Method**: `DELETE`
    - **Description**: Deletes a specific cart item by its ID.
    - **Response**:
@@ -126,9 +144,9 @@ The frontend is running on port 4000
      - **Status 500**: Error deleting cart item.
 
 6. **Clear Cart**
-   - **Endpoint**: `/cart/clear/:id`
+   - **Endpoint**: `cartItems/cart/:id`
    - **Method**: `DELETE`
-   - **Description**: Clears all items from the cart.
+   - **Description**: Clears all items from the cart by passing the user's id as a parameter.
    - **Response**:
      - **Status 200**: Success message.
      - **Status 404**: No items to clear.
@@ -165,11 +183,30 @@ The frontend is running on port 4000
      - **Status 200**: Success message with created order.
      - **Status 404**: Missing fields in the request body.
      - **Status 500**: Error during payment or order creation.
-
+```
+{
+    "userId" : "1",
+    "cardNumber":"4111111111111111",
+    "expiryDate":"11/25",
+    "CVV":"663",
+    "firstName":"Sameer",
+    "lastName":"Saad",
+    "country":"Egypt",
+    "city":"Alexandria",
+    "address":"Bridge",
+    "zipCode":"22951",
+    "phone":"+209456452",
+    "email":"ali@gmail.com",
+    "products":[]
+}
+```
 4. **Update Order**
    - **Endpoint**: `/orders/:id`
    - **Method**: `PATCH`
    - **Description**: Updates the billing address of an order by its ID.
+   - **Request Body**:
+     - **billingAddress**: Contains `firstName`, `lastName`, `city`, `country`, `address`, `zipCode`, `phone`, `email`.
+     - **payment**: Contains `cardNumber`, `expiryDate`, `CVV`.
    - **Response**:
      - **Status 200**: Success message with updated order.
      - **Status 404**: Order not found.
@@ -215,7 +252,13 @@ The frontend is running on port 4000
    - **Response**:
      - **Status 200**: Success message with created user data.
      - **Status 500**: Error creating user.
-
+```
+{
+    "username":"ali",
+    "email":"ali@gmail.com",
+    "password":"ali"
+}
+```
 4. **Update User**
    - **Endpoint**: `/users/:id`
    - **Method**: `PATCH`
