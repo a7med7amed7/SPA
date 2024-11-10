@@ -1,4 +1,5 @@
 const models = require('../models/product')
+const models_cartItems = require('../models/cartItem')
 const getAllProducts = (req, res, next) => {
     models.getAllProducts().then(result => {
         console.log(result);
@@ -68,11 +69,13 @@ const updateProduct = (req, res, next) => {
         });
     })
 };
-const deleteProduct = (req, res, next) => {
+const deleteProduct = async (req, res, next) => {
     console.log("DELETE", req.params.id)
-    models.deleteProduct(req.params.id).then(result => {
+    let quit = false;
+    await models.deleteProduct(req.params.id).then(result => {
         console.log(result, result.affectedRows);
         if (!result.affectedRows) {
+            quit = true;
             return res.status(404).json({
                 status: 0,
                 message: "There no product with the given id!"
@@ -82,10 +85,18 @@ const deleteProduct = (req, res, next) => {
             status: 1,
         });
     }).catch(err => {
+        quit = true;
         return res.status(500).json({
             status: 0,
             message: "Unable to delete the wanted product"
         });
+    })
+    console.log(quit);
+    if (quit) return;
+    await models_cartItems.deleteCartItemByProductId(req.params.id).then(result => {
+        console.log(result)
+    }).catch(err => {
+        console.log(err);
     })
 };
 

@@ -83,6 +83,18 @@ const getCustomCartItem = async (userId, productId) => {
     }
 }
 
+const deleteCartItemByProductId = async (id) => {
+    try {
+        const [result] = await pool.query(
+            `DELETE FROM cart_items WHERE product_id=?;`,
+            [id]
+        );
+        return result;
+    } catch (error) {
+        throw error;
+    }
+}
+
 module.exports = {
     getCartItems,
     createCartItem,
@@ -90,5 +102,6 @@ module.exports = {
     updateCartItemQuantity,
     deleteCartItem,
     getCustomCartItem,
-    clearCart
+    clearCart,
+    deleteCartItemByProductId
 }

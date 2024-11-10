@@ -5,13 +5,14 @@ import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 function Page() {
+
     const [product, setProduct] = useState(null); // Initial state set to `null` instead of `{}`.
     const [loaded, setLoaded] = useState(false);
     const [hasMounted, setHasMounted] = useState(false);
     const [quantity, setQuantity] = useState(1);
     const params = useParams();
     const { id } = params;
-
+    const [message, setMessage] = useState(null);
     // Track if the component has mounted on the client-side.
     useEffect(() => {
         setHasMounted(true);
@@ -36,24 +37,31 @@ function Page() {
         }
     }, [id]);
 
-    // Prevent rendering during SSR until the component has mounted on the client
     if (!hasMounted) return null; // Return nothing until mounted to avoid SSR mismatch
+
     const handleAddToCart = async (e) => {
-        console.log(product)
-        const data = {
-            quantity: quantity
+        console.log(product);
+        const data = { quantity };
+        try {
+            const res = await fetch(`http://localhost:3000/api/v1/cartItems/${id}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
+            console.log(res);
+
+            setMessage("Quantity Updated")
+        } catch (error) {
+            console.error('Error adding to cart:', error);
+            setMessage("Failed to update")
+
         }
-        const res = await fetch(`http://localhost:3000/api/v1/cartItems/${id}`, {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-        });
-        console.log(res);
-    }
+    };
     return (
         <div className={styles.container}>
+            {message ? <div style={{ padding: "3px", backgroundColor: "green", color: "white", textAlign: "center" }}>{message}</div> : ""}
             <h1 className={styles.title}>Product</h1>
             {loaded ? (
                 product ? (

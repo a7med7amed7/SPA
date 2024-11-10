@@ -10,6 +10,7 @@ function Page() {
     const [hasMounted, setHasMounted] = useState(false);
     const params = useParams();
     const { id } = params;
+    const [message, setMessage] = useState(null);
 
     // Track if the component has mounted on the client-side.
     useEffect(() => {
@@ -51,10 +52,17 @@ function Page() {
             },
             body: JSON.stringify(data),
         });
+        console.log(res, res.status);
+        if (res.status === 200)
+            setMessage("Added to cart")
+        else
+            setMessage("Already in the cart")
+
         console.log(res);
     }
     return (
         <div className={styles.container}>
+            {message ? <div style={{ padding: "3px", backgroundColor: "green", color: "white", textAlign: "center" }}>{message}</div> : ""}
             <h1 className={styles.title}>Product</h1>
             {loaded ? (
                 product ? (

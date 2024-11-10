@@ -93,7 +93,7 @@ const createCartItem = async (req, res, next) => {
     // Assert the req.body is ok
     // We should check first if the product is present or not
     console.log("BODY", req.body);
-    let quit = false;
+    let quit = false, rem = 0;
     await models_product.getProduct(req.body.productId).then(result => {
         if (!result.length) {
             quit = true;
@@ -102,7 +102,17 @@ const createCartItem = async (req, res, next) => {
                 message: "There no product with the given id!"
             });
         }
+        console.log(result[0], req.body.quantity);
+        if (result[0].stock < req.body.quantity) {
+            quit = 1;
+            return res.status(404).json({
+                status: 0,
+                message: "The quantity is more than the available"
+            });
+        }
+        rem = result[0].stock - req.body.quantity;
     }).catch(err => {
+        quit = true;
         return res.status(500).json({
             status: 0,
             message: "Unable to get the wanted product"
@@ -130,7 +140,6 @@ const createCartItem = async (req, res, next) => {
     if (quit) return;
     await models.createCartItem(req.body).then(result => {
         console.log(result);
-
         return res.status(200).json({
             status: 1,
             data: result
@@ -142,12 +151,62 @@ const createCartItem = async (req, res, next) => {
             message: "Unable to create a new item"
         });
     })
-};
-const updateCartItemQuantity = (req, res, next) => {
-    console.log(req.body, req.params.id)
-    models.updateCartItemQuantity(req.params.id, req.body.quantity).then(result => {
+    await models_product.updateProductStock(rem, req.body.productId).then(result => {
         console.log(result);
+    }).catch(err => {
+        console.log(err);
+        return res.status(500).json({
+            status: 0,
+            message: "Unable to update the stock"
+        });
+    })
+};
+const updateCartItemQuantity = async (req, res, next) => {
+    console.log(req.body, req.params.id)
+    let item = {}, product = {};
+    let quit = false;
+    await models.getCartItem(req.params.id).then(result => {
+        console.log("ITEM", result);
+        if (!result.length) {
+            quit = true;
+            return res.status(404).json({
+                status: 0,
+                message: "There no item with the given id!"
+            });
+        }
+        item = result[0];
+    }).catch((err => {
+        quit = true;
+        console.log(err);
+        return res.status(404).json({
+            status: 0,
+            message: "There no item with the given id!"
+        });
+    }))
+    await models_product.getProduct(item.product_id).then(result => {
+        console.log("PRODUCT", result);
+        if (!result.length) {
+            quit = true;
+            return res.status(404).json({
+                status: 0,
+                message: "There no product with the given id!"
+            });
+        }
+        product = result[0];
+    }).catch((err => {
+        quit = true;
+        console.log(err);
+        return res.status(404).json({
+            status: 0,
+            message: "There no item with the given id!"
+        });
+    }))
+    if (quit) return;
+    let rem = product.stock + item.quantity - req.body.quantity;
+    await models.updateCartItemQuantity(req.params.id, req.body.quantity).then(result => {
+        console.log("QUANTITY", result);
         if (!result.affectedRows) {
+            quit = true;
             return res.status(404).json({
                 status: 0,
                 message: "There no item with the given id!"
@@ -157,11 +216,28 @@ const updateCartItemQuantity = (req, res, next) => {
             status: 1,
         });
     }).catch(err => {
+        quit = true;
         return res.status(500).json({
             status: 0,
             message: "Unable to update the item's quantity"
         });
     })
+    if (quit) return;
+    await models_product.updateProductStock(rem, item.product_id).then(result => {
+        console.log("STOCK", result);
+        if (!result.affectedRows) {
+            return res.status(404).json({
+                status: 0,
+                message: "There no product with the given id!"
+            });
+        }
+    }).catch((err => {
+        console.log(err);
+        return res.status(404).json({
+            status: 0,
+            message: "Unable to update the stock!"
+        });
+    }))
 };
 const deleteCartItem = (req, res, next) => {
     console.log("DELETE", req.params.id)

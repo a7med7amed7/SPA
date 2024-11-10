@@ -3,7 +3,7 @@ const pool = require('../config/db')
 const getAllProducts = async (callback) => {
     try {
         const [result] = await pool.query(
-            `SELECT id,name,price FROM products;`,
+            `SELECT id,name,price,stock FROM products;`,
             []
         );
         return result;
@@ -46,6 +46,17 @@ const updateProduct = async (id, data) => {
         throw error;
     }
 }
+const updateProductStock = async (rem, id) => {
+    try {
+        const [result] = await pool.query(
+            `UPDATE products SET stock=? WHERE id=?;`,
+            [rem, id]
+        );
+        return result;
+    } catch (error) {
+        throw error;
+    }
+}
 const deleteProduct = async (id) => {
     try {
         const [result] = await pool.query(
@@ -77,5 +88,6 @@ module.exports = {
     getProduct,
     updateProduct,
     deleteProduct,
-    getListOfProducts
+    getListOfProducts,
+    updateProductStock
 }
