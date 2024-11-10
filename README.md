@@ -21,6 +21,9 @@ SHOW TABLES;
 ```
 You should see 4 tables (products, cart_items, orders, users)
 
+The backend's endpoints should start with http://localhost:3000/api/v1
+The frontend is running on port 4000
+
 ## Endpoints (Products)
 
 ### 1. **Get All Products**
