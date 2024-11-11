@@ -5,6 +5,7 @@ const getCartItems = async (req, res, next) => {
     // let quit = false;
     // let list = [], qnt = [], IDs = [];
     let result_records = [];
+    let quit = false;
     await models.getCartItems(req.body.id).then(result => {
         console.log("RES", result);
         result_records = result;
@@ -13,11 +14,13 @@ const getCartItems = async (req, res, next) => {
         //     data: result
         // });
     }).catch(err => {
+        quit = true;
         return res.status(500).json({
             status: 0,
             message: "Unable to get the cart items"
         });
     })
+    if (quit) return;
     let response = [];
     for (let i = 0; i < result_records.length; i++) {
         let d = {
@@ -25,12 +28,18 @@ const getCartItems = async (req, res, next) => {
             id: result_records[i].product_id,
             quantity: result_records[i].quantity
         };
+        let empty = false;
         let prms = await models_product.getProduct(result_records[i].product_id).then(result => {
             console.log("RECORD", result)
+            if (!result.length) {
+                empty = true;
+                return {};
+            }
             return result[0];
         }).catch(err => {
             console.log(err);
         })
+        if (empty) continue
         console.log(prms);
         d["name"] = prms["name"];
         d["price"] = prms["price"];
