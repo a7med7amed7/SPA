@@ -4,12 +4,6 @@
 sudo docker-compose -f docker-compose.yml up -d --build
 ```
 ```
-docker-compose exec backend npx knex migrate:latest
-```
-```
-docker-compose exec backend npx knex seed:run
-```
-```
 sudo docker-compose exec mysql mysql -u root -p
 ```
 password: rootpassword
