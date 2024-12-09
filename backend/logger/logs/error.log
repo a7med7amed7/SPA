@@ -1,0 +1,50 @@
+{"level":"error","message":"Unknown column: Make sure there's no typo in the column name and the column exists in the table.","service":"user-service","timestamp":"2024-11-29 04:39:06.248 AM"}
+{"level":"error","message":"Database Error","service":"user-service","timestamp":"2024-11-29 07:16:11.940 PM"}
+{"level":"error","message":"Database Error","service":"user-service","timestamp":"2024-11-29 07:17:58.393 PM"}
+{"level":"error","message":"Valdation Error While Getting a User By Id","service":"user-service","timestamp":"2024-11-29 07:27:20.808 PM"}
+{"level":"error","message":"There's a problem in the provided id","service":"user-service","timestamp":"2024-11-29 07:28:50.633 PM"}
+{"level":"error","message":"There's a problem in the provided id","service":"user-service","timestamp":"2024-11-29 07:30:23.166 PM"}
+{"level":"error","message":"There's a problem in the provided id","service":"user-service","timestamp":"2024-11-29 07:43:42.756 PM"}
+{"context":{"src":"controllers/user/getUser"},"isOperationalError":true,"level":"error","name":"ValidationError","service":"user-service","severity":"low","statusCode":500,"timestamp":"2024-11-29 07:44:10.486 PM"}
+{"context":{"src":"controllers/user/getUser"},"isOperationalError":true,"level":"error","name":"ValidationError","service":"user-service","severity":"low","statusCode":500,"timestamp":"2024-11-29 07:45:14.856 PM"}
+{"context":{"src":"controllers/user/getUser"},"isOperationalError":true,"level":"error","name":"ValidationError","service":"user-service","severity":"low","statusCode":500,"timestamp":"2024-11-29 07:46:19.290 PM"}
+{"level":"error","message":"There's a problem in the provided id","service":"user-service","src":"controllers/user/getUser","timestamp":"2024-11-29 07:47:03.370 PM"}
+{"level":"error","message":"Unknown column: Make sure there's no typo in the column name and the column exists in the table.","service":"user-service","timestamp":"2024-11-29 07:49:46.982 PM"}
+{"level":"error","message":"Unknown column: Make sure there's no typo in the column name and the column exists in the table.","service":"user-service","timestamp":"2024-11-29 07:52:06.593 PM"}
+{"context":{"query":"SELECT id,username,email,password FROM users;","sqlMessage":"Unknown column 'username' in 'field list'","type":"QueryError"},"isOperationalError":false,"level":"error","message":"Unknown column: Make sure there's no typo in the column name and the column exists in the table.","name":"DatabaseError","service":"user-service","severity":"critical","stack":"DatabaseError: Unknown column: Make sure there's no typo in the column name and the column exists in the table.\n    at getAllUsers (/app/controllers/user.js:13:14)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)","statusCode":500,"timestamp":"2024-11-29 07:54:55.971 PM"}
+{"context":{"query":"SELECT id,username,email,password FROM users;","sqlMessage":"Unknown column 'username' in 'field list'","type":"QueryError"},"isOperationalError":false,"level":"error","message":"Unknown column: Make sure there's no typo in the column name and the column exists in the table.","name":"DatabaseError","service":"user-service","severity":"critical","stack":"DatabaseError: Unknown column: Make sure there's no typo in the column name and the column exists in the table.\n    at getAllUsers (/app/controllers/user.js:13:14)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)","statusCode":500,"timestamp":"2024-11-29 07:56:02.377 PM"}
+{"context":{"query":"SELECT id,username,email,password FROM users;","sqlMessage":"Unknown column 'username' in 'field list'","type":"QueryError"},"isOperationalError":false,"level":"error","message":"Unknown column: Make sure there's no typo in the column name and the column exists in the table.","name":"DatabaseError","service":"user-service","severity":"critical","stack":"DatabaseError: Unknown column: Make sure there's no typo in the column name and the column exists in the table.\n    at getAllUsers (/app/controllers/user.js:13:14)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)","statusCode":500,"timestamp":"2024-11-29 07:57:07.702 PM"}
+{"context":{"query":"SELECT id,username,email,password FROM users;","sqlMessage":"Unknown column 'username' in 'field list'","type":"QueryError"},"isOperationalError":false,"level":"error","name":"DatabaseError","service":"user-service","severity":"critical","statusCode":500,"timestamp":"2024-11-29 07:57:43.704 PM"}
+{"context":{"type":"QueryError"},"isOperationalError":false,"level":"error","name":"DatabaseError","service":"user-service","severity":"critical","statusCode":500,"timestamp":"2024-11-29 08:00:07.329 PM"}
+{"level":"error","message":"Database Error","service":"user-service","timestamp":"2024-11-29 08:00:41.498 PM"}
+{"level":"error","message":"Database Error","service":"user-service","timestamp":"2024-11-29 08:39:56.831 PM"}
+{"level":"error","message":"Unspeciefied Database Error","service":"user-service","timestamp":"2024-11-29 08:43:10.667 PM"}
+{"level":"error","message":"Unable to create new user","service":"user-service","timestamp":"2024-11-29 08:44:12.372 PM"}
+{"level":"error","message":"Unable to create new user","service":"user-service","timestamp":"2024-11-29 08:44:46.432 PM"}
+{"level":"error","message":"Unable to create new user","service":"user-service","timestamp":"2024-11-29 08:45:27.765 PM"}
+{"level":"error","message":"Unable to create new user","service":"user-service","timestamp":"2024-11-29 08:46:21.485 PM"}
+{"level":"error","message":"SQL syntax error: Check the SQL statement syntax for errors or unsupported queries.","service":"user-service","timestamp":"2024-11-29 08:50:25.792 PM"}
+{"level":"error","message":"Duplicate entry: The value you're trying to insert already exists for a column with a UNIQUE constraint.","service":"user-service","timestamp":"2024-11-29 08:55:43.351 PM"}
+{"level":"error","message":"There's a problem in the provided id","service":"user-service","timestamp":"2024-11-29 10:40:47.736 PM"}
+{"level":"error","message":"There's a problem in the provided id","service":"user-service","timestamp":"2024-11-29 10:41:08.793 PM"}
+{"level":"error","message":"Unspeciefied Database Error","service":"user-service","timestamp":"2024-11-29 10:45:26.477 PM"}
+{"level":"error","message":"Unspeciefied Database Error","service":"user-service","timestamp":"2024-11-30 12:00:11.149 AM"}
+{"level":"error","message":"Unspeciefied Database Error","service":"user-service","timestamp":"2024-11-30 12:01:21.260 AM"}
+{"level":"error","message":"Unspeciefied Database Error","service":"user-service","timestamp":"2024-11-30 01:59:23.512 AM"}
+{"level":"error","message":"Unspeciefied Database Error","service":"user-service","timestamp":"2024-11-30 01:59:53.668 AM"}
+{"level":"error","message":"Unspeciefied Database Error","service":"user-service","timestamp":"2024-11-30 02:02:04.341 AM"}
+{"level":"error","message":"Unspeciefied Database Error","service":"user-service","timestamp":"2024-11-30 03:23:42.552 AM"}
+{"level":"error","message":"Unspeciefied Database Error","service":"user-service","timestamp":"2024-11-30 03:27:46.930 AM"}
+{"level":"error","message":"Unspeciefied Database Error","service":"user-service","timestamp":"2024-11-30 03:28:21.851 AM"}
+{"level":"error","message":"Unspeciefied Database Error","service":"user-service","timestamp":"2024-11-30 03:43:18.984 AM"}
+{"level":"error","message":"Unspeciefied Database Error","service":"user-service","timestamp":"2024-11-30 03:44:44.638 AM"}
+{"level":"error","message":"Unspeciefied Database Error","service":"user-service","timestamp":"2024-11-30 03:45:55.075 AM"}
+{"level":"error","message":"Unspeciefied Database Error","service":"user-service","timestamp":"2024-11-30 03:48:40.837 AM"}
+{"level":"error","message":"Unspeciefied Database Error","service":"user-service","timestamp":"2024-11-30 03:51:35.470 AM"}
+{"level":"error","message":"Unspeciefied Database Error","service":"user-service","timestamp":"2024-11-30 03:52:53.324 AM"}
+{"level":"error","message":"Unknown column: Make sure there's no typo in the column name and the column exists in the table.","service":"user-service","timestamp":"2024-12-01 05:44:14.034 AM"}
+{"level":"error","message":"Unknown column: Make sure there's no typo in the column name and the column exists in the table.","service":"user-service","timestamp":"2024-12-01 05:44:24.160 AM"}
+{"level":"error","message":"Unknown column: Make sure there's no typo in the column name and the column exists in the table.","service":"user-service","timestamp":"2024-12-01 05:44:54.473 AM"}
+{"level":"error","message":"Unspeciefied Database Error","service":"user-service","timestamp":"2024-12-01 05:45:37.281 AM"}
+{"level":"error","message":"Unspeciefied Database Error","service":"user-service","timestamp":"2024-12-01 05:45:43.626 AM"}
+{"level":"error","message":"There's a problem in the provided id","service":"user-service","timestamp":"2024-12-01 05:46:01.948 AM"}

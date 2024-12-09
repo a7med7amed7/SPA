@@ -24,7 +24,7 @@ function Page() {
             try {
                 const res = await fetch(`http://localhost:3000/api/v1/products/${id}`);
                 const data = await res.json();
-                setProduct(data.data[0]); // Assuming `data.data` contains the product details
+                setProduct(data.data); // Assuming `data.data` contains the product details
                 console.log(data.data);
             } catch (err) {
                 console.error('Fetch error:', err);
@@ -42,7 +42,7 @@ function Page() {
     if (!hasMounted) return null; // Return nothing until mounted to avoid SSR mismatch
     const handleAddToCart = async (e) => {
         const data = {
-            userId: "1",
+            cartId: "1",
             productId: id,
             quantity: 1
         }

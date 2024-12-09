@@ -1,0 +1,15 @@
+module.exports = {
+    1054: "Unknown column: Make sure there's no typo in the column name and the column exists in the table.",
+    1062: "Duplicate entry: The value you're trying to insert already exists for a column with a UNIQUE constraint.",
+    1064: "SQL syntax error: Check the SQL statement syntax for errors or unsupported queries.",
+    1146: "Table doesn't exist: Ensure the table name is correct and the table exists in the database.",
+    1205: "Lock wait timeout exceeded: Another transaction is holding the lock. Retry the operation or check for long-running transactions.",
+    1213: "Deadlock found: Transactions are conflicting with each other. Retry the transaction or refactor the queries to avoid conflicts.",
+    1216: "Cannot add or update a child row: A foreign key constraint fails. Ensure the referenced parent row exists.",
+    1217: "Cannot delete or update a parent row: A foreign key constraint fails. Check if child rows are dependent on this row.",
+    1049: "Unknown database: Ensure the database name is correct and the database exists on the server.",
+    1136: "Column count doesn't match: Verify the number of columns in the query matches the number of values provided.",
+    2002: "Connection refused: Ensure the database server is running, and the host and port are correctly configured.",
+    1045: "Access denied: Check your database username, password, and user permissions.",
+    2013: "Lost connection to MySQL server: Check network connectivity and server configuration.",
+};

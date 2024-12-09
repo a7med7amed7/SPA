@@ -5,32 +5,41 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
+    restart: on-failure:10
     ports:
       - "3000:3000"
     volumes:
       - ./backend:/app
-      - /app/node_modules # Avoid overwriting node_modules
+      - /app/node_modules
     environment:
       - MYSQL_HOST=mysql
       - MYSQL_USER=root
       - MYSQL_PASSWORD=rootpassword
-      - MYSQL_DATABASE=testdb
+      - MYSQL_DATABASE=payment
       - PAYMENT_LOGIN_KEY=899Ny3FJdtb
       - PAYMENT_TRANSACTION_KEY=34rPX7v25bBjHd6N
       - MAILJET_API_KEY=ccc97ea75f1ce90d1406da17eb79fa86
       - MAILJET_SECRET_KEY=88d5a807ffd3b5b31f13a558f3621172
+      - NODE_ENV=development
+
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
 
   mysql:
     image: mysql:8.0
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: testdb
+      MYSQL_DATABASE: payment
     ports:
       - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD-SHELL", "mysqladmin ping -h localhost -u root -prootpassword || exit 1" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
 
   frontend:
     build:

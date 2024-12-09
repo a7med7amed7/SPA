@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE 3000
 
-CMD ["sh", "-c", "npx knex migrate:latest && npm run dev"]
+CMD ["sh", "-c", "npx knex migrate:latest && npx knex seed:run && npm run dev"]

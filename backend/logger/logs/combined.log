@@ -1,0 +1,7 @@
+{"level":"info","message":"Testing Logger development","service":"user-service","timestamp":"2024-11-29 01:54:48.622 AM"}
+{"level":"info","message":"Testing Logger development","service":"user-service","timestamp":"2024-11-29 01:56:04.956 AM"}
+{"level":"info","message":"Testing Logger development","service":"user-service","timestamp":"2024-11-29 02:01:46.937 AM"}
+{"level":"info","message":"Testing Logger development","service":"user-service","timestamp":"2024-11-29 02:02:14.408 AM"}
+{"level":"info","message":"Testing Logger development","service":"user-service","timestamp":"2024-11-29 02:02:47.022 AM"}
+{"level":"info","message":"Testing Logger development","service":"user-service","timestamp":"2024-11-29 02:04:57.124 AM"}
+{"context":{"src":"controllers/user/getUser"},"isOperationalError":true,"level":"info","name":"ValidationError","service":"user-service","severity":"low","statusCode":500,"timestamp":"2024-11-29 07:46:19.288 PM"}

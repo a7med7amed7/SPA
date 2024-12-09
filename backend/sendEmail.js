@@ -1,30 +1,29 @@
 const mailjet = require('node-mailjet')
     .apiConnect(process.env.MAILJET_API_KEY, process.env.MAILJET_SECRET_KEY);
-const send = (title, data, cost, products, email, name) => {
+const send = (title, data) => {
     console.log("SEND EMAIL")
-    console.log(email);
-    console.log(name);
+    console.log(data);
     let htmlProductsTable = `
     <table border="1" cellpadding="5" cellspacing="0" style="width: 100%; margin-top: 20px; border-collapse: collapse;">
-        <thead>
-            <tr>
+    <thead>
+    <tr>
                 <th>Product Name</th>
                 <th>Price</th>
                 <th>Quantity</th>
                 <th>Total Paid</th>
-            </tr>
-        </thead>
-        <tbody>
-    `;
-
-    products.forEach(product => {
-        const totalProductCost = product.price * product.quantity;
+                </tr>
+                </thead>
+                <tbody>
+                `;
+    let cost = 0;
+    data.products.forEach(product => {
+        cost += product.cost;
         htmlProductsTable += `
             <tr>
                 <td>${product.name}</td>
                 <td>${product.price}$</td>
                 <td>${product.quantity}</td>
-                <td>${totalProductCost}$</td>
+                <td>${product.cost}$</td>
             </tr>
         `;
     });
@@ -60,8 +59,8 @@ const send = (title, data, cost, products, email, name) => {
                     },
                     To: [
                         {
-                            Email: email,
-                            Name: name
+                            Email: data.email,
+                            Name: `${data.firstName} ${data.lastName}`
                         }
                     ],
                     Subject: title,

@@ -35,7 +35,7 @@ export default function page() {
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    body: JSON.stringify({ id: "1" })
+                    body: JSON.stringify({ cartId: "1" })
                 });
                 const data = await res.json();
                 console.log(data)
@@ -62,11 +62,18 @@ export default function page() {
     }, [products])
     if (!hasMounted) return null;
     const handleClick = async () => {
+        let myProducts = [];
+        for (let i = 0; i < products.length; i++) {
+            myProducts.push({
+                productId: products[i].product_id,
+                quantity: products[i].quantity
+            })
+        }
         const data = {
             userId: "1",
-            cardNumber,
-            expiryDate,
-            CVV,
+            // cardNumber,
+            // expiryDate,
+            // CVV,
             firstName,
             lastName,
             country,
@@ -75,8 +82,9 @@ export default function page() {
             zipCode,
             phone: phoneNumber,
             email,
-            products
+            products: myProducts
         }
+        console.log(data);
         const res = await fetch(`http://localhost:3000/api/v1/orders`, {
             method: "POST",
             headers: {
@@ -121,11 +129,11 @@ export default function page() {
                                     <p className={styles.productColor}>White</p>
                                 </div>
                                 <div className={styles.productQuantity}>
-                                    <Link href={`/cart/${product.cid}`} style={{ color: "black", background: "#ddcaca", fontSize: "40px", padding: "8px 25px", margin: "0 6px" }}>-</Link>
+                                    <Link href={`/cart/${product.product_id}`} style={{ color: "black", background: "#ddcaca", fontSize: "40px", padding: "8px 25px", margin: "0 6px" }}>-</Link>
                                     <div style={{ fontSize: "20px", margin: "0 8px" }}>
                                         {product.quantity}
                                     </div>
-                                    <Link href={`/cart/${product.cid}`} style={{ color: "black", background: "#ddcaca", fontSize: "40px", padding: "8px 20px", margin: "0 6px" }}>+</Link>
+                                    <Link href={`/cart/${product.product_id}`} style={{ color: "black", background: "#ddcaca", fontSize: "40px", padding: "8px 20px", margin: "0 6px" }}>+</Link>
                                 </div>
                                 <p style={{ fontWeight: "bold" }}> {product.price}$</p>
 

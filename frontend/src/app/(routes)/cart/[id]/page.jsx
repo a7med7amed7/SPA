@@ -23,9 +23,15 @@ function Page() {
     useEffect(() => {
         const getProduct = async () => {
             try {
-                const res = await fetch(`http://localhost:3000/api/v1/cartItems/${id}`);
+                const res = await fetch(`http://localhost:3000/api/v1/cartItems/single`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ cartId: "1", productId: id })
+                });
                 const data = await res.json();
-                setProduct(data.data[0]); // Assuming `data.data` contains the product details
+                setProduct(data.data); // Assuming `data.data` contains the product details
                 console.log(data.data);
             } catch (err) {
                 console.error('Fetch error:', err);
@@ -42,9 +48,9 @@ function Page() {
 
     const handleAddToCart = async (e) => {
         console.log(product);
-        const data = { quantity };
+        const data = { cartId: "1", productId: id, quantity };
         try {
-            const res = await fetch(`http://localhost:3000/api/v1/cartItems/${id}`, {
+            const res = await fetch(`http://localhost:3000/api/v1/cartItems`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",

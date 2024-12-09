@@ -1,13 +1,12 @@
-// knexfile.js
 
 module.exports = {
     development: {
         client: "mysql2",
         connection: {
-            host: "mysql",  // Docker service name
+            host: "mysql",
             user: "root",
-            password: "rootpassword",  // Replace with your MySQL root password
-            database: "testdb" // Replace with your database name
+            password: "rootpassword",
+            database: "payment"
         },
         migrations: {
             directory: "./migrations"
